@@ -1,0 +1,2 @@
+C:\gl\webTemp\webTemp\obj\Debug\webTemp.njsprojResolveAssemblyReference.cache
+C:\gl\webTemp\webTemp\bin\Microsoft.NodejsTools.WebRole.dll
