@@ -1,5 +1,6 @@
 ﻿/// <binding AfterBuild='deploy' />
 var gulp = require('gulp');
+var plan = require('flightplan')
 var deploy = require('ssh-deploy');
 var Candyman = new require('candyman');
 var candyman = new Candyman({
@@ -13,10 +14,7 @@ var candyman = new Candyman({
 });
 
 gulp.task('deploy', function () {
-//return candyman.deploy();
-    deploy.publish('root@192.168.0.106', { directory: process.cwd }).then(function () {
-        return deploy.start('root@192.168.0.106', { directory: process.cwd });
-    }).done(function () {
-        console.log('updated deployment');
+        return candyman.deploy();
+
     });
 });

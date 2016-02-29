@@ -22,7 +22,6 @@
   },
   "devDependencies": {
     "candyman": "^0.1.86",
-    "gulp": "^3.9.1",
-    "ssh-deploy": "0.0.9"
+    "gulp": "^3.9.1"
   }
 }
