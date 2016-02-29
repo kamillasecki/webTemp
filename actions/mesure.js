@@ -3,9 +3,6 @@ exports.get = function (req, res){
         console.log('Hello world');
         var mraa = require('mraa');
         
-        startSensorWatch();
-        //toggle();
-        
         var inputV = 4.3;
         var inputmV = inputV * 1000;
         
