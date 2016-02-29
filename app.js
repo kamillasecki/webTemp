@@ -12,7 +12,7 @@ const PORT=8080;
 
 
 app.get('/', function (req, res) {
-    return mesure.get(req, res);
+    mesure.get(req, res);
 });
 
 //Lets start our server

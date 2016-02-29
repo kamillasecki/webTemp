@@ -1,5 +1,5 @@
-﻿var mesure = function () {
-    var get = function (req, res){
+﻿
+exports.get = function (req, res){
         console.log('Hello world');
         var mraa = require('mraa');
         
@@ -25,11 +25,3 @@
         res.send("temperature now: " + celsius_temperature);
     }
     
-
-    return {
-        get: get,
-
-    };
-};
-
-module.exports = mesure;
