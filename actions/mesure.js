@@ -14,7 +14,7 @@ exports.get = function (req, res){
         var jump = (inputmV / 1024);
         var voltage = reading * 4.202312139;
                 
-        var resistance = (1023 - a) * 10000 / a; //get the resistance of the sensor;
+        //var resistance = (1023 - a) * 10000 / a; //get the resistance of the sensor;
         console.log("Resistance: " + resistance);
 
         var celsius_temperature = (voltage - 500) / 10;
