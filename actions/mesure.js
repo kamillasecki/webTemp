@@ -10,7 +10,7 @@ exports.get = function (req, res){
  
         board.on("ready", function() {
         this.pinMode(7, five.Pin.OUTPUT);
-        this.digitalRead(7, function(value) {
+        this.analogRead(0, function(value) {
                 console.log(value);
         });
         });
