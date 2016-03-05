@@ -7,7 +7,7 @@ var mesure = require('./actions/mesure.js')
 var configDB = require('./config/mongoDB.js');
 
 //Lets define a port we want to listen to
-const PORT=7331;
+const PORT=8080;
 
 //We need a function which handles requests and send response
 
