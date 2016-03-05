@@ -1,16 +1,18 @@
 ﻿//Lets require/import the HTTP module
 var http = require('http');
 var express = require('express');
+var mongoose = require('mongoose');
 var app = express();
 var port = 8080;
 var mesure = require('./actions/mesure.js')
+var configDB = require('./config/mongoDB.js');
 
 //Lets define a port we want to listen to
 const PORT=8080;
 
 //We need a function which handles requests and send response
 
-
+mongoose.connect(configDB.url);
 app.get('/', function (req, res) {
     mesure.get(req, res);
 });

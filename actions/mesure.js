@@ -1,9 +1,19 @@
-﻿
+
 exports.get = function (req, res){
         console.log('Hello world');
         var mraa = require('mraa');
         
-        var inputV = 4.3;
+        console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the co
+        
+        var myDigitalPin7 = new mraa.Gpio(7);
+        myDigitalPin5.dir(mraa.DIR_IN);
+        
+        var a = myDigitalPin5.read();
+        
+        
+        
+        
+        var inputV =5.0;
         var inputmV = inputV * 1000;
         
         //GROVE Kit A0 Connector --> Aio(0)
@@ -18,7 +28,6 @@ exports.get = function (req, res){
         //console.log("Resistance: " + resistance);
 
         var celsius_temperature = (voltage - 500) / 10;
-        console.log("Analog Pin (A0) Output: " + Math.round(reading * 100) / 100 + "    |    jump: " + Math.round(jump * 100) / 100 + "    |     Voltage: " + Math.round(voltage * 100) / 100 + "    |    Celsius Temperature " + Math.round(celsius_temperature * 100) / 100);
+        console.log("Analog Pin (A0) Output: " + a + "    |    jump: " + Math.round(jump * 100) / 100 + "    |     Voltage: " + Math.round(voltage * 100) / 100 + "    |    Celsius Temperature " + Math.round(celsius_temperature * 100) / 100);
         res.send("temperature now: " + celsius_temperature);
-    }
-    
+    };
