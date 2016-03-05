@@ -11,7 +11,8 @@ exports.get = function (req, res){
         board.on("ready", function() {
         this.pinMode(7, five.Pin.OUTPUT);
         this.analogRead(0, function(value) {
-                console.log(value);
+                var tempC = 3950 /(Math.log((1025.0 * 10 / value - 10) / 10) + 3950 / 298.0) - 273.0;
+                console.log(tempC);
         });
         });
         console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the co
@@ -20,8 +21,6 @@ exports.get = function (req, res){
         myDigitalPin7.dir(mraa.DIR_IN);
         
         var a = myDigitalPin7.read();
-        
-        
         
         
         var inputV =5.0;
