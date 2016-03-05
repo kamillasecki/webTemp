@@ -9,10 +9,21 @@ exports.get = function (req, res){
         });
  
         board.on("ready", function() {
+        var THERMISTORNOMINAL = 10000;
+        var TEMPERATURENOMINAL = 25;
+        var BCOEFFICIENT = 3950;
+        var SERIESRESISTOR = 10000 ;
         this.pinMode(7, five.Pin.OUTPUT);
         this.analogRead(0, function(value) {
-                var tempC = 3950 /(Math.log((1025.0 * 10 / value - 10) / 10) + 3950 / 298.0) - 273.0;
-                console.log(tempC);
+                var temp = value / THERMISTORNOMINAL;
+                temp = Math.log(temp);
+                temp = temp / BCOEFFICIENT;
+                temp = temp + 1.0 / (TEMPERATURENOMINAL + 273.15);
+                temp = 1.0 / temp;
+                temp = temp - 273.15;
+                
+                //var tempC = 3950 /(Math.log((1025.0 * 10 / value - 10) / 10) + 3950 / 298.0) - 273.0;
+                console.log(temp);
         });
         });
         console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the co
