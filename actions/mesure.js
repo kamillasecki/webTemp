@@ -6,9 +6,9 @@ exports.get = function (req, res){
         console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the co
         
         var myDigitalPin7 = new mraa.Gpio(7);
-        myDigitalPin5.dir(mraa.DIR_IN);
+        myDigitalPin7.dir(mraa.DIR_IN);
         
-        var a = myDigitalPin5.read();
+        var a = myDigitalPin7.read();
         
         
         
