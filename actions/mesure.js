@@ -2,7 +2,18 @@
 exports.get = function (req, res){
         console.log('Hello world');
         var mraa = require('mraa');
-        
+        var five = require("johnny-five");
+        var Galileo = require("galileo-io");
+        var board = new five.Board({
+                io: new Galileo()
+        });
+ 
+        board.on("ready", function() {
+        this.pinMode(7, five.Pin.OUTPUT);
+        this.digitalRead(7, function(value) {
+                console.log(value);
+        });
+        });
         console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the co
         
         var myDigitalPin7 = new mraa.Gpio(7);
