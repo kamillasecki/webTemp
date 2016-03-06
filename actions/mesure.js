@@ -13,7 +13,6 @@ exports.get = function (req, res){
         var TEMPERATURENOMINAL = 25;
         var BCOEFFICIENT = 3950;
         var SERIESRESISTOR = 10000 ;
-        this.pinMode(7, five.Pin.OUTPUT);
         this.analogRead(0, function(value) {
                
                 var voltage = (value * 5.0) / 1023;
