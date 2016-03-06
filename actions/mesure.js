@@ -15,6 +15,8 @@ exports.get = function (req, res){
         var SERIESRESISTOR = 10000 ;
         this.pinMode(7, five.Pin.OUTPUT);
         this.analogRead(0, function(value) {
+                var voltage = (value * 5.0) / 1023;
+                var resistance = 10000/ (1023/value -1);
           //var steinhart = value / THERMISTORNOMINAL;     // (R/Ro)
           //steinhart = Math.log(steinhart);                  // ln(R/Ro)
           //steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
@@ -23,7 +25,7 @@ exports.get = function (req, res){
           //steinhart -= 273.15;                         // convert to C
                 
                 //var tempC = 3950 /(Math.log((1025.0 * 10 / value - 10) / 10) + 3950 / 298.0) - 273.0;
-                console.log(value);
+                console.log("Value: " + value + "   |   voltage: " + voltage + "   |   Resistance: " + resistance );
         });
         });
         console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the co
