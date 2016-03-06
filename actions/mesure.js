@@ -8,14 +8,14 @@ exports.get = function (req, res){
                 io: new Galileo()
         });
  
-        board.on("ready", function() {
+        board.on("ready", setTimeout(function() {
         var THERMISTORNOMINAL = 10000;
         var TEMPERATURENOMINAL = 25;
         var BCOEFFICIENT = 3950;
         var SERIESRESISTOR = 10000 ;
         this.pinMode(7, five.Pin.OUTPUT);
         this.analogRead(0, function(value) {
-                setTimeout( function() {
+               
                 var voltage = (value * 5.0) / 1023;
                 var resistance = 1023/value;
                 resistance = resistance - 1;
@@ -29,9 +29,10 @@ exports.get = function (req, res){
               
         
                 console.log("Value: " + value + "   |   voltage: " + voltage + "   |   Resistance: " + resistance + "   |   temp: " + steinhart);
-                }, 20000);
+                  
+                
         });
-        });
+        },2000));
         console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the co
         
         var myDigitalPin7 = new mraa.Gpio(7);
