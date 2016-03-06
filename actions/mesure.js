@@ -19,15 +19,15 @@ exports.get = function (req, res){
                 var resistance = 1023/value
                 resistance = resistance - 1;
                 resistance = 9000 / resistance;
-          //var steinhart = value / THERMISTORNOMINAL;     // (R/Ro)
-          //steinhart = Math.log(steinhart);                  // ln(R/Ro)
-          //steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
-          //steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
-          //steinhart = 1.0 / steinhart;                 // Invert
-          //steinhart -= 273.15;                         // convert to C
-                
+          var steinhart = value / THERMISTORNOMINAL;     // (R/Ro)
+          steinhart = Math.log(steinhart);                  // ln(R/Ro)
+          steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
+          steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
+          steinhart = 1.0 / steinhart;                 // Invert
+          steinhart -= 273.15;                         // convert to C
+              
                 //var tempC = 3950 /(Math.log((1025.0 * 10 / value - 10) / 10) + 3950 / 298.0) - 273.0;
-                console.log("Value: " + value + "   |   voltage: " + voltage + "   |   Resistance: " + resistance );
+                console.log("Value: " + value + "   |   voltage: " + voltage + "   |   Resistance: " + resistance + "   |   temp: " + steinhart);
         });
         });
         console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the co
