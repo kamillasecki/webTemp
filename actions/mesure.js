@@ -15,7 +15,7 @@ exports.get = function (req, res){
         var SERIESRESISTOR = 10000 ;
         this.pinMode(7, five.Pin.OUTPUT);
         this.analogRead(0, function(value) {
-                setTimeout( function(){
+                setTimeout( function() {
                 var voltage = (value * 5.0) / 1023;
                 var resistance = 1023/value;
                 resistance = resistance - 1;
@@ -29,7 +29,7 @@ exports.get = function (req, res){
               
         
                 console.log("Value: " + value + "   |   voltage: " + voltage + "   |   Resistance: " + resistance + "   |   temp: " + steinhart);
-                }, 2000);
+                }, 20000);
         });
         });
         console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the co
