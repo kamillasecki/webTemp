@@ -16,7 +16,9 @@ exports.get = function (req, res){
         this.pinMode(7, five.Pin.OUTPUT);
         this.analogRead(0, function(value) {
                 var voltage = (value * 5.0) / 1023;
-                var resistance = 10000/ (1023/value -1);
+                var resistance = 1023/value
+                resistance = resistance - 1;
+                resistance = 10000 / resistance;
           //var steinhart = value / THERMISTORNOMINAL;     // (R/Ro)
           //steinhart = Math.log(steinhart);                  // ln(R/Ro)
           //steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
