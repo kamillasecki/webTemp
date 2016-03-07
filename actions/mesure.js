@@ -17,22 +17,25 @@ exports.get = function (req, res){
                 var BCOEFFICIENT = 3950;
                 var SERIESRESISTOR = 10000 ;
                 board.pinMode(7, five.Pin.OUTPUT);
-                board.analogRead(0, function(value) {
-                        var voltage = (value * 5.0) / 1023;
-                        var resistance = 1023/value;
-                        resistance = resistance - 1;
-                        resistance = 8800 / resistance;
-                        var steinhart = resistance / THERMISTORNOMINAL;     // (R/Ro)
-                        steinhart = Math.log(steinhart);                  // ln(R/Ro)
-                        steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
-                        steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
-                        steinhart = 1.0 / steinhart;                 // Invert
-                        steinhart -= 273.15;                         // convert to C
-                              
-                        console.log("Value: " + value + "   |   voltage: " + voltage + "   |   Resistance: " + resistance + "   |   temp: " + steinhart);
+                var reading = board.analogRead(0, function(value) {
+                        return value});
+                
                         
-                        return steinhart;
-                });
+                var voltage = (reading * 5.0) / 1023;
+                var resistance = 1023/reading;
+                resistance = resistance - 1;
+                resistance = 8800 / resistance;
+                
+                var steinhart = resistance / THERMISTORNOMINAL;     // (R/Ro)
+                steinhart = Math.log(steinhart);                  // ln(R/Ro)
+                steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
+                steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
+                steinhart = 1.0 / steinhart;                 // Invert
+                steinhart -= 273.15;                         // convert to C
+
+                console.log("Value: " + reading + "   |   voltage: " + voltage + "   |   Resistance: " + resistance + "   |   temp: " + steinhart);
+                        
+                return steinhart;
         }
         
 
