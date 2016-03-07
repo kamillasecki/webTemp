@@ -18,7 +18,10 @@ exports.get = function (req, res){
                 var SERIESRESISTOR = 10000 ;
                 board.pinMode(7, five.Pin.OUTPUT);
                 var reading = board.analogRead(0, function(value) {
+                        console.log("Value: " + value);
                         return value});
+                        
+                console.log("Reading: " + reading);
                 
                         
                 var voltage = (reading * 5.0) / 1023;
