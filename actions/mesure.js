@@ -5,7 +5,9 @@ exports.get = function (req, res){
 
 
  
-        var temp = function() {
+        var temp = getTemperature();
+        
+        function getTemperature() {
                 var THERMISTORNOMINAL = 10000;
                 var TEMPERATURENOMINAL = 25;
                 var BCOEFFICIENT = 3950;
