@@ -19,7 +19,7 @@ exports.get = function (req, res){
                 board.pinMode(7, five.Pin.OUTPUT);
                 var reading = board.analogRead(0, function(value) {
                         console.log("Value: " + value);
-                        return value});
+                        return value*1});
                         
                 console.log("Reading: " + reading);
                 
