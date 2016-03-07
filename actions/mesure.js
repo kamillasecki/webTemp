@@ -2,18 +2,22 @@
 exports.get = function (req, res){
         console.log('Hello world');
         var five = require("johnny-five");
+        var Galileo = require("galileo-io");
 
-
+        var board = new five.Board({
+                io: new Galileo()
+        });
  
         var temp = getTemperature();
         
         function getTemperature() {
+
                 var THERMISTORNOMINAL = 10000;
                 var TEMPERATURENOMINAL = 25;
                 var BCOEFFICIENT = 3950;
                 var SERIESRESISTOR = 10000 ;
-                this.pinMode(7, five.Pin.OUTPUT);
-                this.analogRead(0, function(value) {
+                board.pinMode(7, five.Pin.OUTPUT);
+                board.analogRead(0, function(value) {
                         var voltage = (value * 5.0) / 1023;
                         var resistance = 1023/value;
                         resistance = resistance - 1;
