@@ -21,7 +21,7 @@ exports.get = function (req, res){
                         console.log("Value: " + value);
                         return this.value});
                         
-                console.log("Reading: " + reading);
+                console.log("Reading: " + JSON.stringify(reading));
                 
                         
                 var voltage = (reading * 5.0) / 1023;
