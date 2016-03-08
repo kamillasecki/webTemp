@@ -69,10 +69,10 @@ exports.get = function(req, res) {
 
                                 my.servo.angle(servoValue); //move servo to new position
                                 
-                                res.send("temperature now: " + r);
+                                
 
                         });
-
+                res.send("temperature now: " + r);
                 }
 
         }).start();
