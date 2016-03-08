@@ -22,30 +22,38 @@ exports.get = function(req, res) {
                                 pin: 0
                         },
 
-                        servo: {
-                                driver: 'servo',
-                                pin: 3
+                        aSensor2: {
+                                driver: 'analogSensor',
+                                pin: 1
+                        },
+                        
+                        dSensor: {
+                                driver: 'digitalSensor',
+                                pin: 7
                         }
 
                 },
 
                 work: function(my) {
 
-                        var analogValue = 0; //variable for LDR input
+                        var analogValue1 = 0; //variable for LDR input
+                        var analogValue2 = 0;
+                        var digitalValue = 0;
 
-                        var servoValue = 0; //variable for servo position
                         var THERMISTORNOMINAL = 10000;
                         var TEMPERATURENOMINAL = 25;
                         var BCOEFFICIENT = 3984;
                         var SERIESRESISTOR = 10000 ;
-                        my.servo.angle(servoValue); //servo position
 
                         every((3).second(), function() { //determine how often to run
 
-                        analogValue = my.sensor.analogRead(); //read LDR value
-                        analogValue = 1024 -analogValue;
-                        var voltage = (analogValue * 5.0) / 1024;
-                        var resistance = 1024/analogValue;
+                        analogValue1 = my.sensor.analogRead(); //read LDR value
+                        analogValue2 = my.aSensor2.analogRead();
+                        digitalValue = my.dSensor.digitalRead();
+                        
+                        analogValue1 = 1024 -analogValue1;
+                        var voltage = (analogValue1 * 5.0) / 1024;
+                        var resistance = 1024/analogValue1;
                         resistance = resistance - 1;
                         resistance = 10000 * resistance;
                         
@@ -57,21 +65,11 @@ exports.get = function(req, res) {
                         steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
                         steinhart = 1.0 / steinhart;                 // Invert
                         steinhart -= 273.15;                         // convert to C
-                
-
-                        console.log("Value: " + analogValue + "   |   voltage: " + voltage + "   |   Resistance: " + resistance + "   |   temp: " + steinhart);
-
-                               // console.log('Analog value => ', analogValue); //write LDR value to terminal
-
-                                servoValue = ((-analogValue + 1023) * (180 / 1023)); //map LDR values 0-1023 to servo-friendly 0$
-
-                                servoValue = Math.round(servoValue); //round servo value to nearest integer
-
-                                console.log('Servo Value ===> ', servoValue); //write servo value to terminal
-
-                                my.servo.angle(servoValue); //move servo to new position
-                                
-                                
+                        
+                        console.log("Value: " + analogValue1 + "   |   voltage: " + voltage + "   |   Resistance: " + resistance + "   |   temp: " + steinhart);
+                        console.log("analog value2 : " + analogValue2);
+                        console.log("digital value : " + digitalValue);
+                            
 
                         });
                 res.send("temperature now: " + r);
