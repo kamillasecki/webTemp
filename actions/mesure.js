@@ -43,7 +43,7 @@ exports.get = function(req, res) {
                         every((3).second(), function() { //determine how often to run
 
                         analogValue = my.sensor.analogRead(); //read LDR value
-                   
+                        analogValue = 1024 -analogValue;
                         var voltage = (analogValue * 5.0) / 1024;
                         var resistance = 1024/analogValue;
                         resistance = resistance - 1;
