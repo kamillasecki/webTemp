@@ -40,15 +40,15 @@ exports.get = function(req, res) {
                         var SERIESRESISTOR = 10000 ;
                         my.servo.angle(servoValue); //servo position
 
-                        every((1).second(), function() { //determine how often to run
+                        every((3).second(), function() { //determine how often to run
 
                                 analogValue = my.sensor.analogRead(); //read LDR value
-                                analogValue = 1023 - analogValue;
+                        
                                 
-                                                var voltage = (analogValue * 5.0) / 1023;
-                var resistance = 1023/analogValue;
+                                                var voltage = (analogValue * 5.0) / 1024;
+                var resistance = 1024/analogValue;
                 resistance = resistance - 1;
-                resistance = 9000 / resistance;
+                resistance = 10000 / resistance;
 
                 var steinhart = resistance / THERMISTORNOMINAL;     // (R/Ro)
                 steinhart = Math.log(steinhart);                  // ln(R/Ro)
