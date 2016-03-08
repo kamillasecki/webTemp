@@ -19,9 +19,7 @@ exports.get = function(req, res) {
 
                         sensor: {
                                 driver: 'analogSensor',
-                                pin: 0,
-                                lowerLimit: 100,
-                                upperLimit: 1000
+                                pin: 0
                         },
 
                         servo: {
@@ -53,7 +51,7 @@ exports.get = function(req, res) {
 
                                 my.servo.angle(servoValue); //move servo to new position
                                 
-                                r = analogValue
+                                r = analogValue;
 
                         });
 
