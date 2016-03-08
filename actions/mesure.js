@@ -46,11 +46,12 @@ exports.get = function(req, res) {
                         
                                 
                                                 var voltage = (analogValue * 5.0) / 1024;
-                /*var resistance = 1024/analogValue;
+                var resistance = 1024/analogValue;
                 resistance = resistance - 1;
-                resistance = 10000 * resistance;*/
+                resistance = 10000 * resistance;
                 
-                var resistance2 = (voltage / 5.0) * 1023;
+                var resistance2 = ((5.0/voltage) - 1) * 10000;
+                
 
                 var steinhart = resistance2 / THERMISTORNOMINAL;     // (R/Ro)
                 steinhart = Math.log(steinhart);                  // ln(R/Ro)
@@ -59,6 +60,8 @@ exports.get = function(req, res) {
                 steinhart = 1.0 / steinhart;                 // Invert
                 steinhart -= 273.15;                         // convert to C
                 var tempC = BCOEFFICIENT /(Math.log((1025.0 * 10 / analogValue - 10) / 10) + BCOEFFICIENT / 298.0) - 273.0;
+                
+                
 
                 console.log("Value: " + analogValue + "   |   voltage: " + voltage + "   |   Resistance: " + resistance2 + "   |   temp: " + steinhart + " OR: " + tempC);
 
