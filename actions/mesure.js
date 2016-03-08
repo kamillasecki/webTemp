@@ -1,7 +1,19 @@
 
 exports.get = function (req, res){
+        var r;
         console.log('Hello world');
-        var five = require("johnny-five");
+        var cylon = require("cylon");
+        cylon.robot({
+                name:"galileo",
+                connections: {galileo: { adaptor: 'intel-iot'} },
+                devices: {pinA0: {driver: 'direct-pin' , pin: "A0" } },
+                work: function (galileo) {
+                        r = galileo.pinA0.analogRead();
+                        console.log(r);
+                }
+        }).start();
+        
+        
         //var Galileo = require("galileo-io");
 
         //var board = new five.Board({
@@ -10,12 +22,12 @@ exports.get = function (req, res){
  
         //var temp = getTemperature();
         
-        var pin = new five.Pin("A0");
+        //var pin = new five.Pin("A0");
 
-        var temp = pin.read(function(error, value) {
-          console.log(value);
-          return value;
-        });
+        //var temp = pin.read(function(error, value) {
+        //  console.log(value);
+        //  return value;
+        //});
         
         // function getTemperature() {
 
@@ -51,5 +63,5 @@ exports.get = function (req, res){
         
 
 
-        res.send("temperature now: " + temp);
+        res.send("temperature now: " + r);
     };
