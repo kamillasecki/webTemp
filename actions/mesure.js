@@ -43,11 +43,13 @@ exports.get = function(req, res) {
                         every((3).second(), function() { //determine how often to run
 
                         analogValue = my.sensor.analogRead(); //read LDR value
-                        
+                        analogValue = 1024 - analogValue;
                         var voltage = (analogValue * 5.0) / 1024;
                         var resistance = 1024/analogValue;
                         resistance = resistance - 1;
                         resistance = 10000 * resistance;
+                        
+                        var resistance2 = (5.0 / voltage);
 
                         var steinhart = resistance / THERMISTORNOMINAL;     // (R/Ro)
                         steinhart = Math.log(steinhart);                  // ln(R/Ro)
