@@ -37,7 +37,7 @@ exports.get = function(req, res) {
                         var THERMISTORNOMINAL = 10000;
                         var TEMPERATURENOMINAL = 25;
                         var BCOEFFICIENT = 3950;
-                        var SERIESRESISTOR = 9000 ;
+                        var SERIESRESISTOR = 10000 ;
                         my.servo.angle(servoValue); //servo position
 
                         every((3).second(), function() { //determine how often to run
@@ -48,7 +48,7 @@ exports.get = function(req, res) {
                                                 var voltage = (analogValue * 5.0) / 1024;
                 var resistance = 1024/analogValue;
                 resistance = resistance - 1;
-                resistance = 9000 / resistance;
+                resistance = 10000 * resistance;
 
                 var steinhart = resistance / THERMISTORNOMINAL;     // (R/Ro)
                 steinhart = Math.log(steinhart);                  // ln(R/Ro)
