@@ -52,6 +52,8 @@ exports.get = function(req, res) {
                                 console.log('Servo Value ===> ', servoValue); //write servo value to terminal
 
                                 my.servo.angle(servoValue); //move servo to new position
+                                
+                                r = analogValue
 
                         });
 
