@@ -42,30 +42,22 @@ exports.get = function(req, res) {
 
                         every((3).second(), function() { //determine how often to run
 
-                                analogValue = my.sensor.analogRead(); //read LDR value
+                        analogValue = my.sensor.analogRead(); //read LDR value
                         
-                                
-                                                var voltage = (analogValue * 5.0) / 1024;
-                var resistance = 1024/analogValue;
-                resistance = resistance - 1;
-                resistance = 10000 * resistance;
-                
-                var resistance2 = ((5.0/voltage) - 1) * 10000;
+                        var voltage = (analogValue * 5.0) / 1024;
+                        var resistance = 1024/analogValue;
+                        resistance = resistance - 1;
+                        resistance = 10000 * resistance;
+
+                        var steinhart = resistance / THERMISTORNOMINAL;     // (R/Ro)
+                        steinhart = Math.log(steinhart);                  // ln(R/Ro)
+                        steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
+                        steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
+                        steinhart = 1.0 / steinhart;                 // Invert
+                        steinhart -= 273.15;                         // convert to C
                 
 
-                var steinhart = resistance2 / THERMISTORNOMINAL;     // (R/Ro)
-                steinhart = Math.log(steinhart);                  // ln(R/Ro)
-                steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
-                steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
-                steinhart = 1.0 / steinhart;                 // Invert
-                steinhart -= 273.15;                         // convert to C
-                var tempC = BCOEFFICIENT /(Math.log((1025.0 * 10 / analogValue - 10) / 10) + BCOEFFICIENT / 298.0) - 273.0;
-                var Temp2 = Math.log(10000.0 * (1024.0 / analogValue-1)); 
-                Temp2 = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * Temp2 * Temp2 ))* Temp2 );
-                Temp2 = Temp2 - 273.15;      
-                
-
-                console.log("Value: " + analogValue + "   |   voltage: " + voltage + "   |   Resistance: " + resistance2 + "   |   temp: " + steinhart + " OR: " + tempC + " OR: " + Temp2);
+                        console.log("Value: " + analogValue + "   |   voltage: " + voltage + "   |   Resistance: " + resistance + "   |   temp: " + steinhart);
 
                                // console.log('Analog value => ', analogValue); //write LDR value to terminal
 
@@ -77,7 +69,7 @@ exports.get = function(req, res) {
 
                                 my.servo.angle(servoValue); //move servo to new position
                                 
-                                r = analogValue;
+                                res.send("temperature now: " + r);
 
                         });
 
@@ -118,7 +110,4 @@ exports.get = function(req, res) {
                 return steinhart;
         }*/
 
-
-
-        res.send("temperature now: " + r);
 };
