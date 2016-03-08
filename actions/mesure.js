@@ -56,8 +56,9 @@ exports.get = function(req, res) {
                 steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
                 steinhart = 1.0 / steinhart;                 // Invert
                 steinhart -= 273.15;                         // convert to C
+                var tempC = BCOEFFICIENT /(Math.log((1025.0 * 10 / analogValue - 10) / 10) + BCOEFFICIENT / 298.0) - 273.0;
 
-                console.log("Value: " + analogValue + "   |   voltage: " + voltage + "   |   Resistance: " + resistance + "   |   temp: " + steinhart);
+                console.log("Value: " + analogValue + "   |   voltage: " + voltage + "   |   Resistance: " + resistance + "   |   temp: " + steinhart + " OR: " + tempC);
 
                                // console.log('Analog value => ', analogValue); //write LDR value to terminal
 
