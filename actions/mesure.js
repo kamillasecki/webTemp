@@ -6,9 +6,9 @@ exports.get = function (req, res){
         cylon.robot({
                 name:"galileo",
                 connections: {galileo: { adaptor: 'intel-iot'} },
-                devices: {pinA0: {driver: 'direct-pin' , pin: "A0" } },
+                devices: {pin: {driver: 'direct-pin' , pin: 0 } },
                 work: function (galileo) {
-                        r = galileo.pinA0.analogRead();
+                        r = galileo.pin.analogRead();
                         console.log(r);
                 }
         }).start();
