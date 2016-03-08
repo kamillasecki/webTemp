@@ -34,7 +34,7 @@ exports.get = function(req, res) {
                         var analogValue = 0; //variable for LDR input
 
                         var servoValue = 0; //variable for servo position
-                        var THERMISTORNOMINAL = 10000;
+                        var THERMISTORNOMINAL = 5000;
                         var TEMPERATURENOMINAL = 25;
                         var BCOEFFICIENT = 3950;
                         var SERIESRESISTOR = 10000 ;
