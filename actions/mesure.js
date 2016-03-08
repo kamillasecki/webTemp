@@ -28,7 +28,7 @@ exports.get = function(req, res) {
                         },
                         
                         dSensor: {
-                                driver: 'digitalSensor',
+                                driver: 'direct-pin',
                                 pin: 7
                         }
 
