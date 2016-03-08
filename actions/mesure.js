@@ -1,6 +1,6 @@
 
 exports.get = function (req, res){
-        var r;
+        var r = 0;
         console.log('Hello world');
         var cylon = require("cylon");
         cylon.robot({
