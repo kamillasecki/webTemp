@@ -44,10 +44,10 @@ exports.get = function(req, res) {
 
                                 analogValue = my.sensor.analogRead(); //read LDR value
                                 
-                                                var voltage = (analogValue * 5.0) / 1023;
-                var resistance = 1023/analogValue;
+                                                var voltage = (analogValue * 5.0) / 4096;
+                var resistance = 4096/analogValue;
                 resistance = resistance - 1;
-                resistance = 7016 / resistance;
+                resistance = 10000 / resistance;
 
                 var steinhart = resistance / THERMISTORNOMINAL;     // (R/Ro)
                 steinhart = Math.log(steinhart);                  // ln(R/Ro)
