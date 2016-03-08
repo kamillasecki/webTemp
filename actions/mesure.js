@@ -47,7 +47,7 @@ exports.get = function(req, res) {
                                                 var voltage = (analogValue * 5.0) / 1023;
                 var resistance = 1023/analogValue;
                 resistance = resistance - 1;
-                resistance = 8800 / resistance;
+                resistance = 15000 / resistance;
 
                 var steinhart = resistance / THERMISTORNOMINAL;     // (R/Ro)
                 steinhart = Math.log(steinhart);                  // ln(R/Ro)
