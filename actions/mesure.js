@@ -16,8 +16,8 @@ exports.get = function (req, res){
                 var TEMPERATURENOMINAL = 25;
                 var BCOEFFICIENT = 3950;
                 var SERIESRESISTOR = 10000 ;
-                board.pinMode(14, five.Pin.OUTPUT);
-                var reading = board.analogRead(14, function(value) {
+                board.pinMode("A0", five.Pin.OUTPUT);
+                var reading = board.analogRead("A0", function(value) {
                         console.log("Value: " + value);
                         return this.value});
                         
