@@ -36,7 +36,7 @@ exports.get = function(req, res) {
                         var servoValue = 0; //variable for servo position
                         var THERMISTORNOMINAL = 5000;
                         var TEMPERATURENOMINAL = 25;
-                        var BCOEFFICIENT = 3950;
+                        var BCOEFFICIENT = 3984;
                         var SERIESRESISTOR = 10000 ;
                         my.servo.angle(servoValue); //servo position
 
@@ -53,7 +53,7 @@ exports.get = function(req, res) {
                 var resistance2 = ((5.0/voltage) - 1) * 10000;
                 
 
-                var steinhart = resistance2 / THERMISTORNOMINAL;     // (R/Ro)
+                var steinhart = resistance / THERMISTORNOMINAL;     // (R/Ro)
                 steinhart = Math.log(steinhart);                  // ln(R/Ro)
                 steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
                 steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
